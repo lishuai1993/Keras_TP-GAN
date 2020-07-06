@@ -312,7 +312,7 @@ class TPGAN():
         img128 = Conv2D(3, (3, 3), padding='same', strides=(1, 1), activation='tanh', name=name+'_img128', kernel_initializer=TruncatedNormal(stddev=0.02), bias_initializer=Zeros())(d128r3c2)
         
         ret_model = CloudableModel(inputs=[in_img, in_leye, in_reye, in_nose, in_mouth, in_noise], outputs=[img128, img64, img32, fc2, front_leye_img, front_reye_img, front_nose_img, front_mouth_img], name=full_name)        
-        ret_model.summary()
+        # ret_model.summary()
         
         return ret_model
     
@@ -1185,7 +1185,7 @@ class CloudableModel(Model):
             print('copy completed. copied file size:{}'.format(os.path.getsize(filepath)))
 
         super().load_weights(filepath=filepath, by_name=by_name)
-        print('end loading weights file. target file: {}'.format(filepath))
+        print('end loading weights file. target file: {}'.format(filepath))             # 从这里之后就卡住了
     
     def save_weights(self, filepath, overwrite=True):
         print('begin saving weights file. target file: {}'.format(filepath))
